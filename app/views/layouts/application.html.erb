@@ -20,7 +20,7 @@
   <body>
     <% if user_signed_in? %>
       <div style="background-color: #f8f9fa; padding: 10px; text-align: right; border-bottom: 1px solid #ddd;">
-        <h4>Welcome: <%= current_user.email %></h4>
+        <h4>Welcome: <%= current_user.name %></h4>
         <%= link_to 'Sign out', destroy_user_session_path, data: { turbo_method: :delete } %>
       </div>
     <% end %>
