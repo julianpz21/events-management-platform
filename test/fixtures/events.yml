@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  date: 2024-11-27
+  description: MyText
+  capacity: 1
+  category: 1
+  status: 1
+
+two:
+  name: MyString
+  date: 2024-11-27
+  description: MyText
+  capacity: 1
+  category: 1
+  status: 1
