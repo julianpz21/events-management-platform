@@ -1,5 +1,6 @@
 class Event < ApplicationRecord
   belongs_to :user
+  has_many :enrollments
 
   enum status: { active: 0, deleted: 1, archived: 2 }
   enum category: { conference: 0, workshop: 1, webinar: 2, concert: 3, festival: 4, course: 5, networking: 6 }

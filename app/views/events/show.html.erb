@@ -3,11 +3,19 @@
 <%= render @event %>
 
 <div>
-  <%# <% if can?(:update, @event) || can?(:destroy, @event) %> %>
+  <% if can?(:update, @event) || can?(:destroy, @event) %>
     <%= link_to "Edit this event", edit_event_path(@event) %>
     <%= button_to "archive", archive_event_path(@event), method: :patch %>
     <%= button_to "delete", delete_event_path(@event), method: :patch %>
-  <%# <% end %> %>
+  <% end %>
+</div>
+
+<div>
+  <% if @enrollment %>
+    <%= button_to 'Unregister Event', unregister_event_path, method: :delete %>
+  <% else %>
+    <%= button_to 'Register Event', register_event_path, method: :post %>
+  <% end %>
 </div>
 
 <div>

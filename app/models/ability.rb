@@ -5,6 +5,8 @@ class Ability
 
   def initialize(user)
     can :read, Event
+    can :register, Event
+    can :unregister, Event
     can :create, Event if user.admin?
 
     if user.admin?

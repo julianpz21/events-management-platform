@@ -1,7 +1,8 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_event, only: %i[ show edit update archive ]
+  before_action :set_event, only: %i[ show edit update archive register]
+  before_action :set_enrollment, only: %i[ show unregister]
 
   # GET /events or /events.json
   def index
@@ -28,10 +29,8 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         format.html { redirect_to @event, notice: "Event was successfully created." }
-        format.json { render :show, status: :created, location: @event }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,10 +40,8 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.update(event_params)
         format.html { redirect_to @event, notice: "Event was successfully updated" }
-        format.json { render :show, status: :ok, location: @event }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,10 +50,8 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.update(status: :archived)
         format.html { redirect_to @event, notice: "Event successfully archived" }
-        format.json { render :show, status: :ok, location: @event }
       else
         format.html { redirect_to @event, notice: "Only past events can by archived" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,11 +60,29 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.update(status: :deleted)
         format.html { redirect_to @event, notice: "Event successfully deleted" }
-        format.json { render :show, status: :ok, location: @event }
       else
         format.html { redirect_to @event, notice: "Only fuature events can by deleted" }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def register
+    @enrollment = Enrollment.new(user_id: current_user.id, event_id: @event.id)
+
+    respond_to do |format|
+      if @enrollment.save
+        format.html { redirect_to @event, notice: "Register was successfully" }
+      else
+        format.html { redirect_to @event, notice:  @enrollment.errors.full_messages }
+      end
+    end
+  end
+
+  def unregister
+    @enrollment.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to @event, notice: "Untegister successfully" }
     end
   end
 
@@ -77,6 +90,10 @@ class EventsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_event
     @event = Event.find(params[:id])
+  end
+
+  def set_enrollment
+    @enrollment = Enrollment.find_by(user_id: current_user.id, event_id: @event.id)
   end
 
   # Only allow a list of trusted parameters through.
