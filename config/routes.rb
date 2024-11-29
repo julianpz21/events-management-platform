@@ -12,5 +12,10 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "homes#welcome"
-  resources :events
+  resources :events do
+    member do
+      patch :archive
+      patch :delete
+    end
+  end
 end

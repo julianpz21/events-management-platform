@@ -3,8 +3,13 @@
 <%= render @event %>
 
 <div>
-  <%= link_to "Edit this event", edit_event_path(@event) %> |
-  <%= link_to "Back to events", events_path %>
+  <%# <% if can?(:update, @event) || can?(:destroy, @event) %> %>
+    <%= link_to "Edit this event", edit_event_path(@event) %>
+    <%= button_to "archive", archive_event_path(@event), method: :patch %>
+    <%= button_to "delete", delete_event_path(@event), method: :patch %>
+  <%# <% end %> %>
+</div>
 
-  <%= button_to "Destroy this event", @event, method: :delete %>
+<div>
+  <%= link_to "Back to events", events_path %>
 </div>
