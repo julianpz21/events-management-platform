@@ -5,4 +5,6 @@ class User < ApplicationRecord
     :timeoutable
 
   has_many :events, dependent: :destroy
+
+  enum role: { user: 0, admin: 1 }
 end
