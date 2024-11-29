@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     member do
       patch :archive
       patch :delete
+      post :register
+      delete :unregister
     end
   end
 end
