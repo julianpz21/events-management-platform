@@ -6,7 +6,11 @@ class EventsController < ApplicationController
 
   # GET /events or /events.json
   def index
-    @events = Event.active
+    if params[:user_id]
+      @events = Event.joins(:enrollments).where(status: :active, enrollments: { user_id: params[:user_id] })
+    else
+      @events = Event.active
+    end
   end
 
   # GET /events/1 or /events/1.json
