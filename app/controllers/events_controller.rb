@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_event, only: %i[ show edit update archive register]
+  before_action :set_event, only: %i[ show edit update archive delete register]
   before_action :set_enrollment, only: %i[ show unregister]
 
   # GET /events or /events.json
@@ -86,7 +86,7 @@ class EventsController < ApplicationController
     @enrollment.destroy!
 
     respond_to do |format|
-      format.html { redirect_to @event, notice: "Untegister successfully" }
+      format.html { redirect_to @event, notice: "Unregister successfully" }
     end
   end
 
