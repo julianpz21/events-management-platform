@@ -20,4 +20,17 @@ Rails.application.routes.draw do
       delete :unregister
     end
   end
+
+  namespace :api do
+    namespace :v1 do
+      resources :events, only: [ :index, :create, :update ] do
+        member do
+          patch :archive
+          patch :delete
+          post :register
+          delete :unregister
+        end
+      end
+    end
+  end
 end
