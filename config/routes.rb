@@ -31,6 +31,11 @@ Rails.application.routes.draw do
           delete :unregister
         end
       end
+
+      devise_scope :user do
+        post "login", to: "sessions#create"
+        delete "logout", to: "sessions#destroy"
+      end
     end
   end
 end

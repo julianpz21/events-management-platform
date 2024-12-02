@@ -1,7 +1,4 @@
-class Api::V1::EventsController < ApplicationController
-  skip_before_action :authenticate_user!
-  skip_before_action :verify_authenticity_token
-
+class Api::V1::EventsController < Api::BaseController
   before_action :set_event, only: %i[ update archive delete ]
   before_action :set_enrollment, only: %i[ unregister]
 
