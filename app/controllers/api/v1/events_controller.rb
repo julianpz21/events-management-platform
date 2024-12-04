@@ -59,7 +59,6 @@ class Api::V1::EventsController < Api::BaseController
   end
 
   def unregister
-    debugger
     if @enrollment&.destroy
       render json: @enrollment, status: :ok
     else
