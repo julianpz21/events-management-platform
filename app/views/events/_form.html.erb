@@ -11,37 +11,37 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
+  <div class="form-group" >
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control", required: true %>
   </div>
 
-  <div>
-    <%= form.label :date, style: "display: block" %>
-    <%= form.date_field :date %>
+  <div class="form-group">
+    <%= form.label :date,  class: "form-label" %>
+    <%= form.date_field :date, class: "form-control", required: true %>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description %>
+  <div class="form-group">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: "form-control", required: true %>
   </div>
 
-  <div>
-    <%= form.label :place, style: "display: block" %>
-    <%= form.text_field :place %>
+  <div class="form-group">
+    <%= form.label :place, class: "form-label" %>
+    <%= form.text_field :place, class: "form-control", required: true %>
   </div>
 
-  <div>
-    <%= form.label :capacity, style: "display: block" %>
-    <%= form.number_field :capacity %>
+  <div class="form-group">
+    <%= form.label :capacity, class: "form-label" %>
+    <%= form.number_field :capacity, class: "form-control", required: true %>
   </div>
 
-  <div>
-    <%= form.label :category, style: "display: block" %>
-    <%= form.select :category, Event.categories.keys.map { |c| [c.titleize, c] }, prompt: "Select category" %>
+  <div class="form-group">
+    <%= form.label :category, class: "form-label" %>
+    <%= form.select :category, Event.categories.keys.map { |category| [category.humanize, category] }, { prompt: "Select a category" }, class: "form-control" %>
   </div>
 
-  <div>
-    <%= form.submit %>
+  <div class="form-group" >
+    <%= form.submit "Update Event", class: "btn btn-primary" %>
   </div>
 <% end %>

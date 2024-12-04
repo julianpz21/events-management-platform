@@ -1,23 +1,26 @@
-<h1>Homes#welcome</h1>
-
+<h1>Events Management platform</h1>
+<hr>
+<h2>Options:</h2>
+<hr>
 <div>
-  <h2>Edit profile</h2>
-  <%= button_to "Edit Profile", edit_user_registration_path, method: :get  %>
+  <h4>Edit profile</h4>
+  <%= button_to "Edit Profile", edit_user_registration_path, method: :get, class: "btn btn-primary btn-sm"%>
+</div>
+<hr>
+<div>
+  <h4>Show events</h4>
+  <%= button_to "Show all events", events_path, method: :get, class: "btn btn-primary btn-sm"  %>
+</div>
+<hr>
+<div>
+  <h4>Events I am registered</h4>
+  <%= button_to "Show events", events_path, method: :get, params: { user_id: current_user.id }, class: "btn btn-primary btn-sm"  %>
 </div>
 
 <div>
-  <h2>Show events</h2>
-  <%= button_to "Show all events", events_path, method: :get  %>
-</div>
-
-<div>
-  <h2>Events I am registered</h2>
-  <%= button_to "Show events", events_path, method: :get, params: { user_id: current_user.id }  %>
-</div>
-
-<div>
+  <hr>
   <% if current_user.admin? %>
-    <h2>create events</h2>
-    <%= button_to "Create events", new_event_path, method: :get  %>
+    <h4>create events</h4>
+    <%= button_to "Create events", new_event_path, method: :get, class: "btn btn-primary btn-sm"  %>
   <% end %>
 </div>

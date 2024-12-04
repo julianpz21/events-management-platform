@@ -1,32 +1,32 @@
-<div id="<%= dom_id event %>">
-  <p>
-    <strong>Name:</strong>
-    <%= event.name %>
-  </p>
+<div class="container mt-4">
+  <h1>Event Details</h1>
 
-  <p>
-    <strong>Date:</strong>
-    <%= event.date %>
-  </p>
-
-  <p>
-    <strong>Description:</strong>
-    <%= event.description %>
-  </p>
-
-  <p>
-    <strong>Capacity:</strong>
-    <%= event.capacity %>
-  </p>
-
-  <p>
-    <strong>Category:</strong>
-    <%= event.category %>
-  </p>
-
-  <p>
-    <strong>Status:</strong>
-    <%= event.status %>
-  </p>
-
+  <!-- Detalles del evento -->
+  <div class="card">
+    <div class="card-header">
+      <h4><%= @event.name %></h4>
+    </div>
+    <div class="card-body">
+      <p><strong>Date:</strong> <%= @event.date.strftime('%B %d, %Y') %></p>
+      <p><strong>Description:</strong> <%= @event.description %></p>
+      <p><strong>Capacity:</strong> <%= @event.capacity %></p>
+      <p><strong>Category:</strong> <%= @event.category %></p>
+      <p><strong>Status:</strong> <%= @event.status %></p>
+    </div>
+    <div class="card-footer text-right">
+      <% if can?(:update, @event) || can?(:destroy, @event) %>
+        <%= link_to 'Edit', edit_event_path(@event), class: 'btn btn-warning' %>
+        <%= link_to 'Back', events_path, class: 'btn btn-secondary' %>
+        <%= link_to "Delete Event", delete_event_path(@event), data: {"turbo-method": :patch}, class: "btn btn-danger" %>
+      <% end %>
+      </div>
+      <hr>
+      <div>
+      <% if @enrollment %>
+        <%= button_to 'Unregister Event', unregister_event_path, method: :delete, class: 'btn btn-warning' %>
+      <% else %>
+        <%= button_to 'Register Event', register_event_path, method: :post, class: 'btn btn-secondary' %>
+      <% end %>
+    </div>
+  </div>
 </div>

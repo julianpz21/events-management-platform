@@ -5,12 +5,35 @@
 <h1>Events</h1>
 
 <div id="events">
-  <% @events.each do |event| %>
-    <%= render event %>
-    <p>
-      <%= link_to "Show this event", event %>
-    </p>
-  <% end %>
+  <%= link_to 'Main page', root_path, class: 'btn btn-info btn-sm' %>
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Description</th>
+        <th>Capacity</th>
+        <th>Category</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @events.each do |event| %>
+        <tr>
+          <td><%= event.name %></td>
+          <td><%= event.date.strftime('%B %d, %Y') %></td>
+          <td><%= event.description.truncate(50) %></td>
+          <td><%= event.capacity %></td>
+          <td><%= event.category %></td>
+          <td><%= event.status %></td>
+          <td>
+            <!-- Botones de acciones: Mostrar, Editar, Eliminar -->
+            <%= link_to 'Show', event_path(event), class: 'btn btn-info btn-sm' %>
+            <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-warning btn-sm' %>
+            <%= link_to "Delete Event", delete_event_path(event), data: {"turbo-method": :patch}, class: "btn btn-danger" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 </div>
-
-<%= link_to "New event", new_event_path %>
