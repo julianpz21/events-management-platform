@@ -1,4 +1,6 @@
 class Api::V1::EventsController < Api::BaseController
+  load_and_authorize_resource
+
   before_action :set_event, only: %i[ update archive delete ]
   before_action :set_enrollment, only: %i[ unregister]
 
@@ -14,7 +16,7 @@ class Api::V1::EventsController < Api::BaseController
   end
 
   def create
-    @event = User.find(params[:user_id]).events.build(event_params)
+    @event = current_user.events.build(event_params)
 
     if @event.save
       render json: @event, status: :ok
@@ -72,7 +74,7 @@ class Api::V1::EventsController < Api::BaseController
   end
 
   def set_enrollment
-    @enrollment = Enrollment.find_by(user_id: params[:user_id], event_id: params[:id])
+    @enrollment = Enrollment.find_by(user_id: current_user.id, event_id: params[:id])
   end
 
   def set_event

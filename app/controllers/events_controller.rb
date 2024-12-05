@@ -4,7 +4,6 @@ class EventsController < ApplicationController
   before_action :set_event, only: %i[ show edit update archive delete register]
   before_action :set_enrollment, only: %i[ show unregister]
 
-  # GET /events or /events.json
   def index
     if params[:user_id]
       @events = Event.joins(:enrollments).where(status: :active, enrollments: { user_id: params[:user_id] })
@@ -13,20 +12,16 @@ class EventsController < ApplicationController
     end
   end
 
-  # GET /events/1 or /events/1.json
   def show
   end
 
-  # GET /events/new
   def new
     @event = Event.new
   end
 
-  # GET /events/1/edit
   def edit
   end
 
-  # POST /events or /events.json
   def create
     @event = current_user.events.build(event_params)
 
@@ -39,7 +34,6 @@ class EventsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /events/1 or /events/1.json
   def update
     respond_to do |format|
       if @event.update(event_params)
@@ -91,7 +85,7 @@ class EventsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
+
   def set_event
     @event = Event.find(params[:id])
   end
@@ -100,7 +94,6 @@ class EventsController < ApplicationController
     @enrollment = Enrollment.find_by(user_id: current_user.id, event_id: @event.id)
   end
 
-  # Only allow a list of trusted parameters through.
   def event_params
     params.require(:event).permit(:name, :date, :description, :place, :capacity, :category, :status)
   end
