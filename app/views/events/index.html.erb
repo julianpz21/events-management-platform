@@ -30,7 +30,7 @@
             <!-- Botones de acciones: Mostrar, Editar, Eliminar -->
             <%= link_to 'Show', event_path(event), class: 'btn btn-info btn-sm' %>
             <%= link_to 'Edit', edit_event_path(event), class: 'btn btn-warning btn-sm' %>
-            <%= link_to "Delete Event", delete_event_path(event), data: {"turbo-method": :patch}, class: "btn btn-danger" %>
+            <%= link_to "Delete Event", delete_event_path(event), data: {"turbo-method": :patch}, class: "btn btn-danger btn-sm" %>
           </td>
         </tr>
       <% end %>

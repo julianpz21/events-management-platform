@@ -20,7 +20,7 @@
 <div>
   <hr>
   <% if current_user.admin? %>
-    <h4>create events</h4>
+    <h4>Create events</h4>
     <%= button_to "Create events", new_event_path, method: :get, class: "btn btn-primary btn-sm"  %>
   <% end %>
 </div>

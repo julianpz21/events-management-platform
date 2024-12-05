@@ -14,7 +14,6 @@ class Api::V1::EventsController < Api::BaseController
   end
 
   def create
-    # @event = current_user.events.build(event_params)
     @event = User.find(params[:user_id]).events.build(event_params)
 
     if @event.save

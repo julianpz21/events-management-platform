@@ -1,19 +1,11 @@
 # frozen_string_literal: true
 
 class GraphqlController < Api::BaseController
-  # skip_before_action :authenticate_user!
-  # protect_from_forgery with: :null_session
-  # If accessing from outside this domain, nullify the session
-  # This allows for outside API access while preventing CSRF attacks,
-  # but you'll have to authenticate your user separately
-  # protect_from_forgery with: :null_session
-
   def execute
     variables = prepare_variables(params[:variables])
     query = params[:query]
     operation_name = params[:operationName]
     context = {
-      # Query context goes here, for example:
       current_user: current_user
     }
     result = EventsManagementPlatformSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
@@ -25,7 +17,6 @@ class GraphqlController < Api::BaseController
 
   private
 
-  # Handle variables in form data, JSON body, or a blank value
   def prepare_variables(variables_param)
     case variables_param
     when String
@@ -37,7 +28,7 @@ class GraphqlController < Api::BaseController
     when Hash
       variables_param
     when ActionController::Parameters
-      variables_param.to_unsafe_hash # GraphQL-Ruby will validate name and type of incoming variables.
+      variables_param.to_unsafe_hash
     when nil
       {}
     else
