@@ -42,6 +42,6 @@
   </div>
 
   <div class="form-group" >
-    <%= form.submit "Update Event", class: "btn btn-primary" %>
+    <%= form.submit @event.persisted? ? "Update Event" : "Create Event", class: "btn btn-primary" %>
   </div>
 <% end %>
