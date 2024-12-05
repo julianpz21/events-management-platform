@@ -13,7 +13,7 @@ class EventNotificationService < ApplicationService
 
   def send_mailers
     enrollments.find_each(batch_size: 100) do |enrollment|
-      EventNotificationJob.perform_now(enrollment.user, enrollment.event)
+      EventNotificationJob.perform_later(enrollment.user, enrollment.event)
     end
   end
 
