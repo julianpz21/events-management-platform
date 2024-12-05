@@ -1,0 +1,4 @@
+send_event_notifications:
+  cron: 'every day at midnight'
+  class: SendNotificationsJob
+  queue: default
