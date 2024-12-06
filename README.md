@@ -170,3 +170,148 @@ In addition to the RESTful API, this application also supports GraphQL for query
 ### **GraphQL Endpoint**
 - **URL**: `/graphql`
 - **Description**: The GraphQL endpoint allows users to query and mutate data by sending GraphQL queries and mutations.
+(each request with **Authorization bearer Token**)
+
+#### **Get Events**
+Description: Retrieves all events with their ID, name, date, and description.
+##### **Example Request:**
+
+```bash
+{
+  events {
+    id
+    name
+    date
+    description
+  }
+}
+
+```
+##### **Example Response:**
+```bash
+{
+  "data": {
+    "events": [
+      {
+        "id": "1",
+        "name": "GraphQL Workshop",
+        "date": "2024-12-10",
+        "description": "Learn GraphQL basics"
+      }
+    ]
+  }
+}
+```
+
+#### **Get My Events**
+Description: Retrieves all events I am registered for
+##### **Example Request:**
+
+```bash
+{
+  myEvents {
+    id
+    name
+    date
+    description
+  }
+}
+
+```
+
+#### **Create Event**
+Description: Create Event
+##### **Example Request:**
+
+```bash
+mutation {
+  createEvent(
+    input: {
+      name: "event name",
+      date: "2024-12-23",
+      description: "description",
+      place: "place",
+      capacity: 5,
+      category: 2,
+      userId: 3
+    }
+  )
+}
+```
+
+#### **Update Event**
+Description: Update Event
+##### **Example Request:**
+
+```bash
+mutation {
+  udpateEvent(
+    input: {
+      name: "event name updated",
+      date: "2024-12-23",
+      description: "description",
+      place: "place",
+      capacity: 5,
+      category: 2
+    }
+  )
+}
+```
+
+#### **Archive Event**
+Description: archive a Event
+##### **Example Request:**
+
+```bash
+mutation {
+  archiveEvent(
+    input: {
+      id: 3
+    }
+  )
+}
+```
+
+#### **delete Event**
+Description: archive a Event
+##### **Example Request:**
+
+```bash
+mutation {
+  deleteEvent(
+    input: {
+      id: 3
+    }
+  )
+}
+```
+
+#### **Register Event**
+Description: register to a Event
+##### **Example Request:**
+
+```bash
+mutation {
+  registerEvent(
+    input: {
+      userId: 3,
+      eventId: 5
+    }
+  )
+}
+```
+
+#### **Unregister Event**
+Description: Unregister to a Event
+##### **Example Request:**
+
+```bash
+mutation {
+  UnregisterEvent(
+    input: {
+      userId: 3,
+      eventId: 5
+    }
+  )
+}
+```
