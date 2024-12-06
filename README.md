@@ -225,17 +225,22 @@ Description: Create Event
 
 ```bash
 mutation {
-  createEvent(
-    input: {
-      name: "event name",
-      date: "2024-12-23",
-      description: "description",
-      place: "place",
-      capacity: 5,
-      category: 2,
-      userId: 3
+    createEvent(
+        input: {
+            name: "event name new"
+            date: "2024-12-23"
+            description: "description"
+            place: "place"
+            capacity: 5
+            category: 2
+        }
+    ) {
+        event {
+            id
+            name
+            status
+        }
     }
-  )
 }
 ```
 
